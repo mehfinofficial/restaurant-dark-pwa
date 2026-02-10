@@ -1050,7 +1050,7 @@ showThankYou();
 setTimeout(() => {
     window.scrollTo(0, 0);   // Scroll to top
     location.reload();       // Reload page
-}, 5000);  // matches thank-you popup duration
+}, 15000);  // matches thank-you popup duration
 });
 
 // BESTSELLER CLICK → SCROLL TO CATEGORY
@@ -1219,8 +1219,9 @@ function showThankYou() {
 
     setTimeout(() => {
         overlay.style.display = "none";
-    }, 5000);
+    }, 15000);
 }
+
 
 
 
