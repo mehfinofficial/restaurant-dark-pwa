@@ -1187,7 +1187,7 @@ function updateWhatsAppButton() {
 
     if (navigator.onLine) {
         btn.disabled = false;
-        btn.innerText = "Place Order on WhatsApp";
+        btn.innerText = "Proceed To Checkout";
         btn.style.opacity = "1";
     } else {
         btn.disabled = true;
@@ -1201,4 +1201,5 @@ window.addEventListener("offline", updateWhatsAppButton);
 
 // Run on page load
 updateWhatsAppButton();
+
 
