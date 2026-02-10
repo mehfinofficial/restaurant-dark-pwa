@@ -2024,3 +2024,81 @@ footer small {
     scrollbar-color: #ff7a00 #1a1a1a;
 }
 
+#installPopupOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.70);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#installPopupBox {
+    width: 88%;
+    max-width: 360px;
+    padding: 26px 24px;
+    border-radius: 22px;
+
+    background: var(--popup-bg, #fff);
+    color: var(--popup-text, #111);
+
+    text-align: center;
+    animation: fadePop 0.35s ease;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+
+/* AUTO THEMING */
+body.dark-mode #installPopupBox {
+    --popup-bg: #1a1a1a;
+    --popup-text: #f1f1f1;
+}
+
+#installPopupLogo {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+}
+
+#installPopupTitle {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+#installPopupText {
+    font-size: 15px;
+    opacity: 0.85;
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+#installPopupInstallBtn {
+    width: 100%;
+    padding: 12px 0;
+    background: #FC8019;
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#installPopupLaterBtn {
+    width: 100%;
+    padding: 11px 0;
+    background: transparent;
+    border: 1px solid #aaa;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #aaa;
+    cursor: pointer;
+}
+
+
