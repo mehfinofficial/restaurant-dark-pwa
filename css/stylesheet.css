@@ -916,7 +916,7 @@ color: white;
     bottom: -8px;
     right: -10px;
 
-    background: #FC8019;
+    background: #FC8019 !important;
     color: white;
     font-size: 10px;
     padding: 3px 6px;
@@ -2156,4 +2156,5 @@ footer small {
     position: relative;
 }
 }
+
 
