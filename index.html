@@ -475,9 +475,12 @@
 <footer id="mainFooter">
     <div class="footer-inner">
 
-        <button id="installAppBtnFooter" onclick="showInstallGuide()">
-    📲 Install App
+        <button id="installAppBtnFooter"
+        class="install-btn"
+        onclick="triggerInstall()">
+    Install App
 </button>
+
 
         
         <!-- BRAND -->
@@ -606,6 +609,11 @@
             <p>3. Choose <b>Install</b>.</p>
         </div>
 
+<button class="install-btn" onclick="triggerInstall()">
+    Install Now
+</button>
+
+        
         <p id="tapToClose">Tap anywhere to close</p>
 
     </div>
@@ -621,6 +629,7 @@
 
 </footer>
 </html>
+
 
 
 
