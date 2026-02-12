@@ -1346,7 +1346,8 @@ async function triggerInstall() {
     } 
     else {
         // Try opening app
-        window.location.href = window.location.origin;
+        window.location.href = window.location.pathname;
+
 
         // If app was uninstalled → auto recover
         setTimeout(() => {
@@ -1369,6 +1370,7 @@ window.addEventListener("appinstalled", () => {
 window.addEventListener("load", () => {
     updateInstallUI();
 });
+
 
 
 
