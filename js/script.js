@@ -918,7 +918,7 @@ if (!navigator.onLine) {
     return;
 }
 
-    
+
     clearErrors(); // remove old errors
 
     let name = fullName.value.trim();
@@ -1032,6 +1032,7 @@ Landmark: ${landmarkVal || "N/A"}`
     let url = "https://wa.me/" + businessNumber + "?text=" + encodeURIComponent(message);
     window.open(url, "_blank");
 
+
 // 🟢 CLEAR CART
 cart = [];
 saveCart();
@@ -1043,6 +1044,7 @@ document.getElementById("checkoutPage").classList.remove("show");
 document.documentElement.classList.remove("html-lock");
 document.body.classList.remove("body-lock");
 document.getElementById("cartPage").classList.remove("show");
+
 // SHOW THANK YOU POPUP
 showThankYou();
 
@@ -1051,6 +1053,7 @@ setTimeout(() => {
     window.scrollTo(0, 0);   // Scroll to top
     location.reload();       // Reload page
 }, 12000);  // matches thank-you popup duration
+
 });
 
 // BESTSELLER CLICK → SCROLL TO CATEGORY
@@ -1203,6 +1206,8 @@ document.getElementById("errorOverlay").addEventListener("click", (e) => {
     if (e.target.id === "errorOverlay") closeError();
 });
 
+//PWA WORKER IS HERE
+
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("/sw.js", { scope: "/" })
@@ -1222,8 +1227,6 @@ function showThankYou() {
     }, 12000);
 }
 
-
-
 // =======================
 // INSTALL GUIDE LOGIC
 // =======================
@@ -1238,7 +1241,7 @@ function showInstallGuide(auto = false) {
     // DO NOT show if PWA installed
     if (isAppInstalled()) {
         console.log("PWA Installed → Hide both overlay & footer button.");
-       
+        document.getElementById("installAppBtnFooter").style.display = "none";
         return;
     }
 
@@ -1276,65 +1279,27 @@ window.addEventListener("load", () => {
     }, 15000);
 });
 
+
 /* ==========================
-   ELITE PWA INSTALL SYSTEM
+   PWA INSTALL SYSTEM
 ========================== */
 
 let deferredPrompt = null;
 
-function isStandalone() {
-    return window.matchMedia("(display-mode: standalone)").matches;
-}
-
-function updateInstallUI() {
-
-    const footerBtn = document.getElementById("installAppBtnFooter");
-    const overlayBtns = document.querySelectorAll("#installGuideOverlay .install-btn");
-
-    if (!footerBtn) return;
-
-    const installedBefore = localStorage.getItem("pwaInstalled") === "yes";
-
-    // 1️⃣ If inside installed app → hide everything
-    if (isStandalone()) {
-        footerBtn.style.display = "none";
-        return;
-    }
-
-    // Always show footer in browser
-    footerBtn.style.display = "inline-block";
-
-    // 2️⃣ If install prompt available → show Install
-    if (deferredPrompt) {
-        footerBtn.innerText = "Install App";
-        overlayBtns.forEach(btn => btn.innerText = "Install App");
-        return;
-    }
-
-    // 3️⃣ If previously installed → show Open
-    if (installedBefore) {
-        footerBtn.innerText = "Open App";
-        overlayBtns.forEach(btn => btn.innerText = "Open App");
-        return;
-    }
-
-    // 4️⃣ Default
-    footerBtn.innerText = "Install App";
-    overlayBtns.forEach(btn => btn.innerText = "Install App");
-}
-
-// Capture install availability
+// Capture install event
 window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    updateInstallUI();
+    console.log("PWA install available");
 });
 
-// Trigger button
+// Universal trigger function
 async function triggerInstall() {
 
+    // Android / Desktop Chrome
     if (deferredPrompt) {
         deferredPrompt.prompt();
+
         const { outcome } = await deferredPrompt.userChoice;
 
         if (outcome === "accepted") {
@@ -1342,37 +1307,27 @@ async function triggerInstall() {
         }
 
         deferredPrompt = null;
-        updateInstallUI();
     } 
     else {
-        // Try opening app
-        window.location.href = window.location.pathname;
-
-
-        // If app was uninstalled → auto recover
-        setTimeout(() => {
-            if (!isStandalone()) {
-                localStorage.removeItem("pwaInstalled");
-                updateInstallUI();
-            }
-        }, 1500);
+        // iOS fallback → show your overlay
+        showInstallGuide(false);
     }
 }
 
-// Detect real install
+// Detect successful install
 window.addEventListener("appinstalled", () => {
     localStorage.setItem("pwaInstalled", "yes");
     deferredPrompt = null;
-    updateInstallUI();
-});
-
-// Run on page load
-window.addEventListener("load", () => {
-    updateInstallUI();
 });
 
 
 
-
-
-
+// Auto hide if already installed
+if (
+    window.matchMedia("(display-mode: standalone)").matches ||
+    localStorage.getItem("pwaInstalled") === "yes"
+) {
+    document.querySelectorAll(".install-btn").forEach(btn => {
+        btn.style.display = "none";
+    });
+}
