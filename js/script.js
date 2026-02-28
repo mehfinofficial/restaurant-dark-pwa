@@ -1331,6 +1331,7 @@ window.addEventListener("appinstalled", () => {
   //  document.querySelectorAll(".install-btn").forEach(btn => {
       //  btn.style.display = "none";
     //});
+
 //}
 
 window.addEventListener("load", () => {
@@ -1342,5 +1343,6 @@ window.addEventListener("load", () => {
         }, 600);
     }, 2200);
 });
+
 
 
