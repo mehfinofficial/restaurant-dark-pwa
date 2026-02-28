@@ -4,7 +4,7 @@
 #splash {
     position: fixed;
     inset: 0;
-    background: #111; /* dark theme */
+   background: #0c0c0c; /* dark theme */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2270,6 +2270,7 @@ footer small {
     transform: scale(0.96);
     box-shadow: 0 4px 16px rgba(255, 128, 25, 0.55);
 }
+
 
 
 
