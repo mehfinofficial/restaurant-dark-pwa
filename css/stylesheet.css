@@ -2322,7 +2322,9 @@ footer small {
     box-shadow: 0 4px 16px rgba(255, 128, 25, 0.55);
 }
 
-
+#checkoutBtn span {
+    color: #ffffff !important;
+}
 
 
 
